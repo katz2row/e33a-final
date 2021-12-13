@@ -1,0 +1,62 @@
+{% extends "memory/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<!-- Bootstrap modal used to display feedback after a match. -->
+<div class="modal fade" tabindex="-1" id="feedback_modal" aria-labelledby="feedback_modalLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal_text_color" id="feedback_modalLabel">You Made a Match!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modal_text_color">
+        <p class="match_feedback"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="head_width">
+  <div class="header_align">
+    <header>
+      <h1>Memory Quiz</h1>
+    </header>
+  </div>
+
+  <!-- Displays the moves and time as the user is playing. -->
+  <div class="game_tracking">
+    {% csrf_token %}
+    Move(s): <span id="moves_counter"></span><br />
+    Time: <span id="played_time"></span><span id="seconds_only" style="display:none;"></span><br />
+  </div>
+
+  <div class="clearfloat"></div>
+
+  <div class="header_align">
+    <div id="winner" style="display: none;">You Win!</div>
+  </div>
+  <div class="game_tracking">
+    <button type="button" class="btn btn-info" name="Play Again" id="playagain" onclick="playAgain();"
+      style="display:none;">Play Again</button>
+  </div>
+  <div class="clearfloat"></div>
+</div>
+
+<section id="game_board"></section>
+
+{% endblock %}
+
+{% block script %}
+<!-- To use a static file in the JavaScript, it had to be defined in the template. Both the text file for the cards and the image face are defined here. -->
+<script>
+  var cardsTXT = "{% static 'memory/cards/cards.txt' %}";
+  var cardBackImg = "{% static 'memory/images/cardface2-250.jpg' %}";
+</script>
+<script src="{% static 'memory/gameplay.js' %}"></script>
+{% endblock %}

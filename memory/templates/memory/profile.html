@@ -1,0 +1,117 @@
+{% extends "memory/layout.html" %}
+{% load static %}
+
+{% block body %}
+<h2>{{profile_user.first_name}} {{profile_user.last_name}}</h2>
+
+<div class="centered_content">
+
+  <!-- Specific information is displayed only to the user whose profile it is. -->
+
+  {% if user.is_authenticated %}
+  {% if profile_user == request.user %}
+  <p>You are logged in with username: <strong>{{profile_user.username}}</strong> and email address:
+    <strong>{{profile_user.email}}</strong>.
+  </p>
+  <p>You follow <button type="button" class="btn btn-light" data-bs-toggle="modal"
+      data-bs-target="#following_list"><strong>{{following_count}}</strong></button> people.</p>
+  {% endif %}
+  {% endif %}
+
+  <!-- The number of followers are available to everyone, and in both the case of the followers and following, clicking the number opens a modal to show the list of followers or who is being followed. -->
+  <h4>Total Followers: <button type="button" class="btn btn-light" data-bs-toggle="modal"
+      data-bs-target="#followers_list"><strong>{{follower_count}}</strong></button></h4>
+
+  <!-- A follow/unfollow button is only displayed if the user is not the one logged in. -->
+  {% if user.is_authenticated %}
+  {% if profile_user != request.user %}
+  {% if following_user is False %}
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Follow" name="follow" class="btn btn-info">
+  </form>
+  {% else %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Unfollow" name="unfollow" class="btn btn-secondary">
+  </form>
+  {% endif %}
+  {% endif %}
+  {% endif %}
+
+  <!-- This is a table displaying the user's bests. -->
+  <table class="table table_style" cellspacing="0">
+    <thead>
+      <tr>
+        <th scope="col">Total Wins</th>
+        <th scope="col">Last Win</th>
+        <th scope="col">Best Moves</th>
+        <th scope="col">Best Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td scope="row">{{total_wins}}</td>
+        <td>{{last_win}}</td>
+        <td>{{best_moves}}</td>
+        <td>{{best_time}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- Bootstrap modal used to display list of those the user is following. -->
+<div class="modal fade" tabindex="-1" id="following_list" aria-labelledby="following_listLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal_text_color" id="following_listLabel">Following</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modal_text_color">
+        <p class="list_following">
+        <ul>
+          {% for following in following_list %}
+          <li>{{following.first_name}} {{following.last_name}} - Username: <a class="linktowinner"
+              href="{% url 'profile' profile_name=following.username %}">{{following.username}}</a></li>
+          {% endfor %}
+        </ul>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap modal used to display list of those following the user. -->
+<div class="modal fade" tabindex="-1" id="followers_list" aria-labelledby="followers_listLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal_text_color" id="followers_listLabel">Followers</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modal_text_color">
+        <p class="list_followers">
+        <ul>
+          {% for follower in follower_list %}
+          <li>{{follower.first_name}} {{follower.last_name}} - Username: <a class="linktowinner"
+              href="{% url 'profile' profile_name=follower.username %}">{{follower.username}}</a></li>
+          {% endfor %}
+        </ul>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

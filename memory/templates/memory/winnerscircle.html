@@ -1,0 +1,46 @@
+{% extends "memory/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<h2>Winners Circle</h2>
+
+<div class="centered_table">
+
+    <!-- This uses Bootstrap/JQuery's Data Tables to both display the information in a sortable table but also to handle the pagination. -->
+    <table class="table table-bordered table-striped border-secondary table-overflow" id="winnerscircletable"
+        cellspacing="0">
+        <thead>
+            <tr>
+                <th scope="col">Player</th>
+                <th scope="col">Player's Username</th>
+                <th scope="col">Total Wins</th>
+                <th scope="col">Last Win</th>
+                <th scope="col">Best Moves</th>
+                <th scope="col">Best Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- For each user who won at least one game, their bests are listed in a new row. -->
+            {% for winner in all_winners %}
+            <tr>
+                <td scope="row"><a class="linktowinner"
+                        href="{% url 'profile' profile_name=winner.username %}">{{winner.first_name}}
+                        {{winner.last_name}}</a></td>
+                <td><a class="linktowinner"
+                        href="{% url 'profile' profile_name=winner.username %}">{{winner.username}}</a></td>
+                <td>{{winner.number_of_wins}}</td>
+                <td>{{winner.last_win}}</td>
+                <td>{{winner.best_moves}}</td>
+                <td class="ind_best_time">{{winner.best_time}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'memory/winners.js' %}"></script>
+{% endblock %}

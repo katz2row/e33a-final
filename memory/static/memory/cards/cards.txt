@@ -1,0 +1,11 @@
+id	carda	cardb	feedback
+1	Bear	Cub	A baby bear is a cub.
+2	Chicken	Chick	A baby chicken is a chick.
+3	Cat	Kitten	A baby cat is a kitten.
+4	Dog	Puppy	A baby dog is a puppy.
+5	Cow	Calf	A baby cow is a calf.
+6	Deer	Fawn	A baby deer is a fawn.
+7	Ferret	Kit	A baby ferret is a kit.
+8	Goat	Kid	A baby goat is a kid.
+9	Hare	Leveret	A baby hare is a leveret.
+10	Kangaroo	Joey	A baby kangaroo is a joey.

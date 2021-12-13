@@ -1,0 +1,266 @@
+body {
+	width: 100%;
+	height: 100%;
+	background: #73595c;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+}
+
+h2 {
+	text-align: center;
+	padding: 10px;
+}
+
+#winnerscircletable_wrapper {
+	background-color: #d4dedd;
+	padding: 10px;
+	color: #212529;
+}
+
+.table_style {
+	background-color: #d4dedd;
+	width: 60%;
+	margin-top: 40px;
+}
+
+.centered_table {
+	overflow: auto;
+}
+
+.table-overflow {
+	table-layout: fixed;
+}
+
+table.table_style >thead > tr > th, table.table_style > tbody > tr > td {
+	text-align: center;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+	bottom: .5em;
+}
+
+.head_width, .centered_table {
+	margin: auto;
+	padding: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.header_align {
+	float: left;
+	text-align: right;
+	width: 60%;
+}
+
+.game_tracking {
+	padding-right: 20px;
+	float: right;
+	text-align: right;
+	width: 40%;
+}
+
+.clearfloat {
+	clear: both;
+}
+
+.centered_content {
+	margin: auto;
+	position: relative;
+	left: 15%;
+}
+
+.input_style {
+	width: 50%;
+	margin: 10px;
+}
+
+.button_style, .padded_p {
+	margin: 10px;
+}
+
+a.body_links {
+	color: #a9abbc;
+}
+
+a.body_links:hover {
+	color: #8a7e9b;
+}
+
+a.linktowinner {
+	color: #48383a;
+	font-weight: 750;
+}
+
+.nav_background {
+	background-color: #9aa8b1;
+}
+
+.nav_text_color {
+	color: #262626;
+}
+
+.navbar-collapse {
+	padding-right: 8px;
+}
+
+#game_board {
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	background: #987e81;
+}
+
+.each_card {
+	position: relative;
+	transition: all .5s;
+	transform-style: preserve-3d;
+	transform: scale(1);
+}
+
+.flip {
+	transform: rotateY(180deg);
+}
+
+.each_card:active {
+	transform: scale(0.97);
+	transition: transform .2s;
+}
+
+.card,
+.card_back {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	backface-visibility: hidden;
+}
+
+.card {
+	transform: rotateY(180deg);
+    font-size: 14px;
+    overflow: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+}
+
+.carda {
+	background-color: #4e6562;
+}
+
+.cardb {
+	background-color: #6f908c;
+	color: #000000;
+}
+
+.matchedcard {
+	background-color: #7e909b;
+	color: #000000;
+}
+
+@media (max-width: 640px) {
+	.header_align {
+		float: left;
+		text-align: left;
+		width: 60%;
+	}
+	
+	.game_tracking {
+		padding-right: 10px;
+		float: right;
+		text-align: right;
+		width: 40%;
+	}
+}
+
+@media (max-width: 1250px) {
+	#game_board, .centered_content {
+		width: calc(90vw);
+		height: calc(85vh);
+	}
+
+	.head_width {
+		width: calc(90vw);
+	}
+
+	#winnerscircletable_wrapper {
+		width: calc(80vw);
+	}
+}
+
+@media (min-width: 1251px) and (max-width: 1575px) {
+	#game_board, .centered_content {
+		width: calc(80vw);
+		height: calc(85vh);
+	}
+
+	.head_width {
+		width: calc(80vw);
+	}
+
+	#winnerscircletable_wrapper {
+		width: calc(70vw);
+	}
+}
+
+@media (min-width: 1576px) {
+	#game_board, .centered_content {
+		width: calc(70vw);
+		height: calc(85vh);
+	}
+
+	.head_width {
+		width: calc(70vw);
+	}
+
+	#winnerscircletable_wrapper {
+		width: calc(50vw);
+	}
+}
+
+@media (max-width: 800px) {
+	.each_card {
+		width: calc(50% - 4px);
+		height: calc(10% - 4px);
+		margin: 2px;
+	}
+}
+
+@media (min-width: 801px) and (max-width: 1000px) {
+	.each_card {
+		width: calc(25% - 6px);
+		height: calc(20% - 6px);
+		margin: 3px;
+	}
+}
+
+@media (min-width: 1001px) {
+	.each_card {
+		width: calc(20% - 10px);
+		height: calc(25% - 10px);
+		margin: 5px
+	}
+}
+
+#winner {
+	font-size: 30px;
+	color: #fffbae;
+	font-weight: bold;
+}
+
+.modal_text_color {
+	color: #000000;
+}

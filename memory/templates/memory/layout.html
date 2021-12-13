@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Memory Quiz{% endblock %}</title>
+    <meta name="description" content="Memory to test your knowledge.">
+
+    <!-- Added JQuery and Bootstrap to use DataTables, which was used to make the table sortable and ultimately also for the pagination. -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{% static 'memory/styles.css' %}">
+    {% block script %}
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar justify-content-end navbar-expand-md nav_background">
+        <ul class="navbar-nav">
+            <!-- This is used to create an icon at smaller viewports. -->
+            <button class="navbar-toggler navbar-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link nav_text_color"
+                        href="{% url 'profile' profile_name=request.user %}"><strong><span
+                                id="profile_link">{{user.username}}</span></strong></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_text_color" href="{% url 'index' %}">Play Memory</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_text_color" href="{% url 'winnerscircle' %}">Winners Circle</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_text_color" href="{% url 'logout' %}">Log Out</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link nav_text_color" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav_text_color" href="{% url 'register' %}">Register</a>
+                </li>
+                {% endif %}
+            </div>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <!-- Updated Bootstrap and placed at body before body per Boostrap instructions. -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

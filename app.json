@@ -2,7 +2,7 @@
   "name": "Memory Game Test",
   "description": "Memory in Python.",
   "image": "heroku/python",
-  "repository": "https://github.com/heroku/python-getting-started",
+  "repository": "https://github.com/katz2row/e33a-final",
   "keywords": ["python", "django" ],
   "addons": [ "heroku-postgresql" ],
   "env": {
